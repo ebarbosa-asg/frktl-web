@@ -1,0 +1,23 @@
+{
+  "slug": "frktl-website",
+  "mode": "feature-init",
+  "date": "2026-05-05",
+  "researcher": "karimo-researcher",
+  "phases": ["internal", "external"],
+  "status": "complete",
+  "source_asset": "/Users/loko/FRKTL/frktl-explainer.jsx",
+  "source_lines": 627,
+  "sections_count": 17,
+  "svg_components_count": 10,
+  "issues_identified": 16,
+  "external_sources": 28,
+  "libraries_evaluated": 6,
+  "tech_stack_recommendation": {
+    "framework": "Next.js 15 App Router",
+    "styling": "Tailwind CSS v4",
+    "animation": "Motion (Framer Motion v11+)",
+    "hero_visual": "Spline (3D isometric scene)",
+    "fonts": "next/font/google (Space Mono, DM Sans, Instrument Serif, Atomic Age)",
+    "deployment": "Vercel + frktlpower.com custom domain"
+  }
+}

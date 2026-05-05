@@ -1,0 +1,196 @@
+sources:
+  - id: motion-gsap-comparison
+    title: "GSAP vs Motion: A detailed comparison"
+    url: https://motion.dev/docs/gsap-vs-motion
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "Bundle sizes, GPU acceleration difference, API philosophy. Motion scroll adds 2.5KB vs GSAP ScrollTrigger 12KB."
+
+  - id: logrocket-animation-libraries
+    title: "Comparing the best React animation libraries for 2026"
+    url: https://blog.logrocket.com/best-react-animation-libraries/
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "Comprehensive comparison: AOS 8KB, Framer Motion 32KB, GSAP 48KB full suite."
+
+  - id: gsap-vs-framer-annnimate
+    title: "GSAP vs Framer Motion vs React Spring: Which Should You Use in 2026?"
+    url: https://www.annnimate.com/blog/gsap-vs-framer-motion-vs-react-spring
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Side-by-side comparison with use case recommendations."
+
+  - id: nextjs-scroll-behavior
+    title: "Next.js 15 Scroll Behavior: A Comprehensive Guide"
+    url: https://dev.to/hijazi313/nextjs-15-scroll-behavior-a-comprehensive-guide-387j
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Scroll behavior in App Router, Link component scroll={false} for section nav."
+
+  - id: nextjs-best-practices-raftlabs
+    title: "Next.js Best Practices in 2025: Performance & Architecture"
+    url: https://www.raftlabs.com/blog/building-with-next-js-best-practices-and-benefits-for-performance-first-teams
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "SSG for marketing pages, App Router structure."
+
+  - id: nextjs-seo-medium
+    title: "How to Make Your Next.js App SEO-Friendly in 2025"
+    url: https://medium.com/@ozgevurmaz/how-to-make-your-next-js-app-seo-friendly-in-2025-67b4dc386b66
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "App Router metadata API, structured data JSON-LD."
+
+  - id: spline-nextjs-dev
+    title: "Next js + 3D elements with spline"
+    url: https://dev.to/nyctonio/next-js-3d-elements-with-spline-3m84
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "Dynamic import pattern for Spline in Next.js to avoid SSR issues."
+
+  - id: spline-react-github
+    title: "GitHub - splinetool/react-spline"
+    url: https://github.com/splinetool/react-spline
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "Official React component for Spline. @splinetool/react-spline/next for blur placeholder SSR support."
+
+  - id: spline-docs-optimize
+    title: "How to optimize your scene - Spline Documentation"
+    url: https://docs.spline.design/doc/how-to-optimize-your-scene/doczPMIye7Ko
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Max 3 embeds per page, lazy loading with spline-viewer, reduce textures."
+
+  - id: spline-vs-r3f-medium
+    title: "Simplifying 3D Integration in React: Spline vs. react-three-fiber"
+    url: https://medium.com/@akbar123jason/simplifying-3d-integration-in-react-spline-vs-react-three-fiber-3f5e1a9e39d3
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "Trade-off analysis: Spline easier, R3F more control."
+
+  - id: r3f-performance-codrops
+    title: "Building Efficient Three.js Scenes: Optimize Performance While Maintaining Quality"
+    url: https://tympanus.net/codrops/2025/02/11/building-efficient-three-js-scenes-optimize-performance-while-maintaining-quality/
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Draco compression 90-95% geometry reduction, Drei Detailed for LOD, WebGPU in 2025."
+
+  - id: r3f-scaling-performance
+    title: "Scaling performance - React Three Fiber"
+    url: https://r3f.docs.pmnd.rs/advanced/scaling-performance
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Official R3F performance docs."
+
+  - id: lottie-mascot-blog
+    title: "Lottie Character Animation: Bring Your Brand Mascot to Life"
+    url: https://lottiefiles.com/blog/design-inspiration/lottie-character-animation-bring-your-brand-mascot-to-life
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "State machines for scroll/hover reactions, IANA MIME type assigned 2025."
+
+  - id: lottie-react
+    title: "Lottie | Lottie for React"
+    url: https://lottiereact.com/
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Integration docs for React."
+
+  - id: lottielab
+    title: "Lottie - The lightweight animation format"
+    url: https://www.lottielab.com/lottie
+    accessed: "2026-05-05"
+    relevance: low
+    notes: "Alternative Lottie editor (web-based, no After Effects required)."
+
+  - id: tailwind-v4-nextjs
+    title: "Install Tailwind CSS with Next.js"
+    url: https://tailwindcss.com/docs/guides/nextjs
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "Official guide. v4 uses @import tailwindcss, no config file needed, 5x faster builds."
+
+  - id: tailwind-v4-nextjs-medium
+    title: "2025: A Complete Guide for Next.js 15, tailwind v4, react 18, shadcn"
+    url: https://medium.com/@dilit/building-a-modern-application-2025-a-complete-guide-for-next-js-1b9f278df10c
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Step-by-step setup guide."
+
+  - id: nextjs-image-optimization
+    title: "Next.js Image Optimization: The next/image Component"
+    url: https://www.debugbear.com/blog/nextjs-image-optimization
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "SVG inline is correct for animated SVGs. next/image for raster only."
+
+  - id: nextjs-og-images
+    title: "Getting Started: Metadata and OG images | Next.js"
+    url: https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "opengraph-image.tsx convention, statically generated at build time."
+
+  - id: nextjs-static-export
+    title: "The Ultimate Guide to Next.js Static Export for Beginners"
+    url: https://www.dhiwise.com/post/nextjs-static-export-guide-to-maximizing-website-performance
+    accessed: "2026-05-05"
+    relevance: low
+    notes: "output: 'export' in next.config.js. Not recommended for FRKTL (disables image optimization)."
+
+  - id: atomic-age-design-kittl
+    title: "Atomic Age design: A Guide to Retro-Futuristic Graphic Style"
+    url: https://www.kittl.com/blogs/atomic-age-design-guide-asp/
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "Key shapes: amoebas, boomerangs, starbursts. Palette: primary blues, teals, oranges. 1945–1967 era."
+
+  - id: atomic-age-font-google
+    title: "Atomic Age - Google Fonts"
+    url: https://fonts.google.com/specimen/Atomic+Age
+    accessed: "2026-05-05"
+    relevance: high
+    notes: "Free Google Font. 1950s American license plate inspiration. Ideal for 50s chapter markers."
+
+  - id: retro-fonts-cssauthor
+    title: "30+ Best Free Retro & Vintage Google Fonts (2025 Guide)"
+    url: https://cssauthor.com/best-free-retro-vintage-google-fonts/
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Reference for curated retro Google Fonts."
+
+  - id: kairos-power-website
+    title: "Kairos Power | Advanced Nuclear Reactor Technology"
+    url: https://www.kairospower.com/
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Competitor analysis. Photography-forward, clean corporate. FRKTL can differentiate with illustration-forward design."
+
+  - id: nuscale-website
+    title: "NuScale Power | Small Modular Reactor (SMR) Nuclear Technology"
+    url: https://www.nuscalepower.com/
+    accessed: "2026-05-05"
+    relevance: low
+    notes: "Competitor reference. Standard corporate tech template."
+
+  - id: creative-market-atomic-trend
+    title: "Trend Report: Atomic Age Design"
+    url: https://creativemarket.com/blog/trend-report-atomic-age-design
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Current design trend context for atomic age revival."
+
+  - id: landing-page-playful-tubik
+    title: "Ctrl+Alt+Delight: 10 Creative Landing Pages from Tubik"
+    url: https://blog.tubikstudio.com/creative-landing-page-design/
+    accessed: "2026-05-05"
+    relevance: medium
+    notes: "Playful illustration + clean layout examples. Custom illustrations add personality without clutter."
+
+  - id: gsap-dev-switch
+    title: "Why I Switched from Framer Motion to GSAP"
+    url: https://dev.to/worapon_jintajirakul/why-i-switched-from-framer-motion-to-gsap-597b
+    accessed: "2026-05-05"
+    relevance: low
+    notes: "Counter-perspective: GSAP for complex timeline animations."
