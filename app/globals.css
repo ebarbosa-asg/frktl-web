@@ -42,3 +42,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Font family utilities — T04 */
+.font-mono { font-family: var(--font-space-mono), monospace; }
+.font-sans { font-family: var(--font-dm-sans), sans-serif; }
+.font-serif { font-family: var(--font-instrument-serif), serif; }
