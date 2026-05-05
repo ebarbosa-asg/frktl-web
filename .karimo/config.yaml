@@ -1,0 +1,46 @@
+# KARIMO Project Configuration
+# Generated: 2026-05-05
+# Project: frktl-web
+
+project:
+  name: "frktl-web"
+  description: "FRKTL Energy public marketing website — single-page scrolling explainer for a modular nuclear reactor startup. Deploys to frktlpower.com via Vercel."
+  runtime: "node"
+  framework: "next.js"
+  package_manager: "npm"
+
+commands:
+  build: "next build"
+  lint: "next lint"
+  test: null
+  typecheck: "tsc --noEmit"
+  dev: "next dev"
+
+boundaries:
+  never_touch:
+    - ".karimo/"
+    - ".git/"
+    - ".env"
+    - ".env.local"
+    - ".env*.local"
+    - "package-lock.json"
+    - "public/"
+    - ".next/"
+    - "node_modules/"
+    - "out/"
+  require_review:
+    - "app/layout.tsx"
+    - "next.config.ts"
+    - "next.config.js"
+    - "next.config.mjs"
+    - "vercel.json"
+    - "tsconfig.json"
+    - "postcss.config.*"
+    - "tailwind.config.*"
+    - "app/globals.css"
+
+deployment:
+  platform: "vercel"
+  domain: "frktlpower.com"
+  strategy: "static_export"
+  notes: "next.config output='export' is recommended — no API routes, no server actions, fully static."
