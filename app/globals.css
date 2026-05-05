@@ -1,29 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  /* FRKTL Brand Palette — ported from frktl-explainer.jsx constants */
-  --color-teal: #0d7377;
-  --color-teal-light: #14a3a8;
-  --color-teal-dark: #0a5c5f;
-  --color-cyan: #00d4aa;
-  --color-dark: #0a1628;
-  --color-dark-mid: #0f2035;
-  --color-dark-card: #111d30;
-  --color-slate: #1a2a42;
-  --color-text: #c8dce8;
-  --color-text-bright: #e8f4f8;
-  --color-orange: #ff6b35;
-  --color-gold: #fbbf24;
-  --color-cream: #fff8ee;
-  --color-steel: #8899aa;
-  --color-purple: #a78bfa;
-  --color-green: #34d399;
-  --color-red-soft: #f87171;
+  /* ── Warm Atomic Palette ── */
+  --color-bg:          #0C0804;
+  --color-bg-alt:      #181008;
+  --color-bg-card:     #201508;
+  --color-bg-elevated: #281C0C;
 
-  /* 50s Atomic-Age additional tokens (for T08 visual redesign) */
-  --color-atomic-orange: #e8521a;
-  --color-atomic-cream: #f5e6c8;
-  --color-atomic-rust: #8b3a1a;
+  --color-amber:       #F5820A;
+  --color-amber-light: #FAA020;
+  --color-amber-dim:   #B85C00;
+  --color-gold:        #F5C518;
+  --color-gold-light:  #FFD84A;
+  --color-rust:        #C23B22;
+  --color-rust-light:  #E04830;
+  --color-sage:        #6FA884;
+  --color-sage-light:  #8DC4A2;
+
+  --color-cream:       #EDE0C8;
+  --color-cream-bright:#FFF8EE;
+  --color-muted:       #7A6A55;
+  --color-border:      #3A2818;
+  --color-border-light:#503820;
+
+  /* Legacy aliases kept for isolated components not yet migrated */
+  --color-teal:        #F5820A;
+  --color-teal-light:  #FAA020;
+  --color-teal-dark:   #B85C00;
+  --color-cyan:        #F5C518;
+  --color-dark:        #0C0804;
+  --color-dark-mid:    #181008;
+  --color-dark-card:   #201508;
+  --color-slate:       #3A2818;
+  --color-text:        #B8A890;
+  --color-text-bright: #FFF8EE;
+  --color-orange:      #E04830;
+  --color-gold:        #F5C518;
+  --color-cream:       #EDE0C8;
+  --color-steel:       #7A6A55;
+  --color-purple:      #C8A06A;
+  --color-green:       #6FA884;
+  --color-red-soft:    #E07060;
+  --color-atomic-orange:#C23B22;
+  --color-atomic-cream: #FFF8EE;
+  --color-atomic-rust:  #8B2A10;
 }
 
 * {
@@ -37,64 +57,77 @@ html {
 }
 
 body {
-  background: var(--color-dark);
-  color: var(--color-text);
+  background: var(--color-bg);
+  color: var(--color-cream);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Font family utilities — T04 */
-.font-mono { font-family: var(--font-space-mono), monospace; }
-.font-sans { font-family: var(--font-dm-sans), sans-serif; }
-.font-serif { font-family: var(--font-instrument-serif), serif; }
-
-/* ─── T08: Typography upgrades ─── */
+/* ── Font utilities ── */
+.font-mono   { font-family: var(--font-space-mono), monospace; }
+.font-sans   { font-family: var(--font-dm-sans), sans-serif; }
+.font-serif  { font-family: var(--font-instrument-serif), serif; }
 .font-atomic { font-family: var(--font-atomic-age), cursive; }
 
-/* TAG label / chapter marker — Atomic Age font */
+/* ── Tag label ── */
 .tag-label {
   font-family: var(--font-atomic-age), cursive;
-  font-size: 13px;
+  font-size: 11px;
   letter-spacing: 4px;
   text-transform: uppercase;
   font-weight: 400;
 }
 
-/* Section header — editorial bold */
+/* ── Section title ── */
 .section-title {
   font-family: var(--font-dm-sans), sans-serif;
-  font-weight: 700;
-  line-height: 1.1;
+  font-weight: 800;
+  line-height: 1.05;
 }
 
-/* Hero headline — Instrument Serif, huge */
+/* ── Hero headline ── */
 .hero-title {
   font-family: var(--font-instrument-serif), serif;
-  font-size: clamp(48px, 8vw, 100px);
-  line-height: 1.05;
+  font-size: clamp(52px, 8vw, 108px);
+  line-height: 1.0;
   font-weight: 400;
 }
 
-/* Stats numeral — Space Mono large */
+/* ── Stats numeral ── */
 .stat-numeral {
   font-family: var(--font-space-mono), monospace;
-  font-size: clamp(40px, 5vw, 64px);
+  font-size: clamp(32px, 4vw, 52px);
   font-weight: 700;
   line-height: 1;
 }
 
-/* Body text */
+/* ── Body text ── */
 .body-text {
   font-family: var(--font-dm-sans), sans-serif;
-  font-size: 15px;
-  line-height: 1.85;
-  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-cream);
   white-space: pre-line;
 }
 
-/* ─── T08: Decorative system ─── */
+/* ── Gradient mesh background ── */
+.mesh-bg {
+  position: relative;
+  overflow: hidden;
+}
+.mesh-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 75% 50%, rgba(245,130,10,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 30%, rgba(194,59,34,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 80%, rgba(245,197,24,0.06) 0%, transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
 
-/* Halftone dot overlay for alternating dark sections */
+/* ── Halftone overlay ── */
 .halftone-overlay {
   position: relative;
 }
@@ -102,40 +135,44 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, var(--color-slate) 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.06;
+  background-image: radial-gradient(circle, var(--color-border-light) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.08;
   pointer-events: none;
 }
 
-/* Blob/amoeba border-radius for learning curve cards */
+/* ── Blob border-radius cards ── */
 .card-blob-1 { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
 .card-blob-2 { border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%; }
 .card-blob-3 { border-radius: 70% 30% 50% 50% / 40% 60% 40% 60%; }
 .card-blob-4 { border-radius: 30% 70% 60% 40% / 50% 40% 60% 50%; }
 
-/* Diagonal DANGER tape stripe for safety section */
+/* ── Danger tape stripe ── */
 .danger-tape-bg {
   background-image: repeating-linear-gradient(
     -45deg,
     transparent,
     transparent 12px,
-    var(--color-orange) 12px,
-    var(--color-orange) 16px,
+    var(--color-amber) 12px,
+    var(--color-amber) 16px,
     transparent 16px,
     transparent 28px,
     var(--color-gold) 28px,
     var(--color-gold) 32px
   );
-  opacity: 0.08;
+  opacity: 0.07;
 }
 
-/* ─── Animation keyframes ─── */
-@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+/* ── Keyframes ── */
+@keyframes pulse  { 0%,100%{opacity:0.4} 50%{opacity:1} }
+@keyframes float  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes floatB { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-14px) rotate(1.5deg)} }
+@keyframes floatC { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-8px) rotate(-1deg)} }
+@keyframes spin   { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes glow   { 0%,100%{opacity:0.5} 50%{opacity:0.9} }
 
-/* Responsive grid for content sections */
+/* ── Responsive grid ── */
 @media (max-width: 768px) {
   .content-grid { flex-direction: column !important; }
-  .visual-col { order: -1 !important; margin-bottom: 24px !important; }
+  .visual-col   { order: -1 !important; margin-bottom: 24px !important; }
 }

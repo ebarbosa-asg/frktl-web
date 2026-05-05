@@ -2,69 +2,56 @@
 
 import { comparisonTable } from "@/data/comparison";
 
+const FRKTL_WINS = new Set(["40–50%","~95%","Zero","No (physics)","Yes — modular","4–8 /line/yr","~7 yrs (program)"]);
+
 export function ComparisonTable() {
   return (
     <section
+      id="comparison"
       style={{
-        padding: "80px 24px",
-        background: "var(--color-dark)",
+        padding: "96px 2rem",
+        background: "var(--color-bg)",
+        borderTop: "1px solid var(--color-border)",
       }}
     >
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        {/* Header */}
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <p
-            className="tag-label"
-            style={{ color: "var(--color-orange)", marginBottom: 16 }}
-          >
-            HEAD-TO-HEAD
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div style={{ textAlign: "center", marginBottom: 56 }}>
+          <p className="tag-label" style={{ color: "#F5820A", marginBottom: 16 }}>
+            Head-to-Head
           </p>
           <h2
             style={{
               fontFamily: "var(--font-instrument-serif, serif)",
-              fontSize: "clamp(32px, 4vw, 52px)",
-              color: "var(--color-text-bright)",
+              fontSize: "clamp(32px, 4vw, 56px)",
+              color: "#FFF8EE",
               fontWeight: 400,
-              lineHeight: 1.2,
+              lineHeight: 1.15,
             }}
           >
             How We Stack Up
           </h2>
         </div>
 
-        {/* Table wrapper — horizontal scroll on mobile */}
         <div style={{ overflowX: "auto" }}>
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "separate",
-              borderSpacing: 0,
-              minWidth: 520,
-            }}
-          >
-            {/* Column headers */}
+          <table style={{ width: "100%", borderCollapse: "separate", borderSpacing: 0, minWidth: 520 }}>
             <thead>
               <tr>
                 {comparisonTable.headers.map((header, i) => (
                   <th
                     key={i}
                     style={{
-                      padding: "14px 20px",
+                      padding: "14px 22px",
                       textAlign: i === 0 ? "left" : "center",
                       fontFamily: "var(--font-space-mono, monospace)",
-                      fontSize: 11,
-                      letterSpacing: "2px",
+                      fontSize: 10,
+                      letterSpacing: "2.5px",
                       textTransform: "uppercase",
-                      color: i === 2 ? "var(--color-cyan)" : "var(--color-steel)",
-                      background:
-                        i === 2
-                          ? "rgba(0,212,170,0.06)"
-                          : "var(--color-dark-mid)",
-                      borderBottom: "2px solid",
-                      borderColor: i === 2 ? "var(--color-teal)" : "var(--color-slate)",
+                      color: i === 2 ? "#F5820A" : "var(--color-muted)",
+                      background: i === 2 ? "rgba(245,130,10,0.07)" : "var(--color-bg-alt)",
+                      borderBottom: `2px solid ${i === 2 ? "#F5820A" : "var(--color-border-light)"}`,
                       borderTopLeftRadius: i === 0 ? 8 : 0,
-                      borderTopRightRadius:
-                        i === comparisonTable.headers.length - 1 ? 8 : 0,
+                      borderTopRightRadius: i === comparisonTable.headers.length - 1 ? 8 : 0,
+                      whiteSpace: "nowrap",
                     }}
                   >
                     {header}
@@ -72,107 +59,66 @@ export function ComparisonTable() {
                 ))}
               </tr>
             </thead>
-
-            {/* Rows */}
             <tbody>
               {comparisonTable.rows.map((row, i) => {
                 const isLast = i === comparisonTable.rows.length - 1;
-                const values = [row.lwr, row.frktl, row.solar];
-
-                // Mark FRKTL (col 2) wins
-                const isFrktlWin = (val: string) =>
-                  val === row.frktl &&
-                  (val.includes("Yes") ||
-                    val.includes("Zero") ||
-                    val.includes("No (physics)") ||
-                    val.includes("Yes —") ||
-                    val.includes("4–8") ||
-                    val.includes("40–50") ||
-                    val.includes("~95"));
+                const isFrktlWin = FRKTL_WINS.has(row.frktl);
 
                 return (
                   <tr
                     key={i}
-                    style={{
-                      background: i % 2 === 0 ? "var(--color-dark-card)" : "var(--color-dark)",
-                    }}
+                    style={{ background: i % 2 === 0 ? "var(--color-bg-card)" : "var(--color-bg)" }}
                   >
-                    {/* Feature name */}
-                    <td
-                      style={{
-                        padding: "14px 20px",
-                        fontFamily: "var(--font-dm-sans, sans-serif)",
-                        fontSize: 13,
-                        fontWeight: 600,
-                        color: "var(--color-text-bright)",
-                        borderBottom: isLast
-                          ? "none"
-                          : "1px solid var(--color-slate)",
-                        borderLeft: "1px solid var(--color-slate)",
-                        borderBottomLeftRadius: isLast ? 8 : 0,
-                      }}
-                    >
-                      {row.feature}
-                    </td>
+                    {/* Feature */}
+                    <td style={{
+                      padding: "13px 22px",
+                      fontFamily: "var(--font-dm-sans, sans-serif)",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      color: "#FFF8EE",
+                      borderBottom: isLast ? "none" : "1px solid var(--color-border)",
+                      borderLeft: "1px solid var(--color-border)",
+                      borderBottomLeftRadius: isLast ? 8 : 0,
+                    }}>{row.feature}</td>
 
                     {/* LWR */}
-                    <td
-                      style={{
-                        padding: "14px 20px",
-                        textAlign: "center",
-                        fontFamily: "var(--font-space-mono, monospace)",
-                        fontSize: 12,
-                        color: "var(--color-steel)",
-                        borderBottom: isLast
-                          ? "none"
-                          : "1px solid var(--color-slate)",
-                        borderLeft: "1px solid var(--color-slate)",
-                        borderRight: "1px solid var(--color-slate)",
-                      }}
-                    >
-                      {row.lwr}
-                    </td>
+                    <td style={{
+                      padding: "13px 22px",
+                      textAlign: "center",
+                      fontFamily: "var(--font-space-mono, monospace)",
+                      fontSize: 12,
+                      color: "var(--color-muted)",
+                      borderBottom: isLast ? "none" : "1px solid var(--color-border)",
+                      borderLeft: "1px solid var(--color-border)",
+                      borderRight: "1px solid var(--color-border)",
+                    }}>{row.lwr}</td>
 
-                    {/* FRKTL — highlighted */}
-                    <td
-                      style={{
-                        padding: "14px 20px",
-                        textAlign: "center",
-                        fontFamily: "var(--font-space-mono, monospace)",
-                        fontSize: 12,
-                        fontWeight: 700,
-                        color: isFrktlWin(row.frktl)
-                          ? "var(--color-cyan)"
-                          : "var(--color-text-bright)",
-                        background: "rgba(0,212,170,0.06)",
-                        borderBottom: isLast
-                          ? "none"
-                          : "1px solid rgba(0,212,170,0.15)",
-                        borderLeft: "1px solid var(--color-teal)",
-                        borderRight: "1px solid var(--color-teal)",
-                      }}
-                    >
-                      {row.frktl}
-                    </td>
+                    {/* FRKTL — highlighted column */}
+                    <td style={{
+                      padding: "13px 22px",
+                      textAlign: "center",
+                      fontFamily: "var(--font-space-mono, monospace)",
+                      fontSize: 12,
+                      fontWeight: 700,
+                      color: isFrktlWin ? "#F5820A" : "#EDE0C8",
+                      background: "rgba(245,130,10,0.06)",
+                      borderBottom: isLast ? "none" : "1px solid rgba(245,130,10,0.12)",
+                      borderLeft: "1px solid rgba(245,130,10,0.4)",
+                      borderRight: "1px solid rgba(245,130,10,0.4)",
+                    }}>{row.frktl}</td>
 
                     {/* Solar */}
-                    <td
-                      style={{
-                        padding: "14px 20px",
-                        textAlign: "center",
-                        fontFamily: "var(--font-space-mono, monospace)",
-                        fontSize: 12,
-                        color: "var(--color-steel)",
-                        borderBottom: isLast
-                          ? "none"
-                          : "1px solid var(--color-slate)",
-                        borderLeft: "1px solid var(--color-slate)",
-                        borderRight: "1px solid var(--color-slate)",
-                        borderBottomRightRadius: isLast ? 8 : 0,
-                      }}
-                    >
-                      {row.solar}
-                    </td>
+                    <td style={{
+                      padding: "13px 22px",
+                      textAlign: "center",
+                      fontFamily: "var(--font-space-mono, monospace)",
+                      fontSize: 12,
+                      color: "var(--color-muted)",
+                      borderBottom: isLast ? "none" : "1px solid var(--color-border)",
+                      borderLeft: "1px solid var(--color-border)",
+                      borderRight: "1px solid var(--color-border)",
+                      borderBottomRightRadius: isLast ? 8 : 0,
+                    }}>{row.solar}</td>
                   </tr>
                 );
               })}
@@ -180,17 +126,15 @@ export function ComparisonTable() {
           </table>
         </div>
 
-        {/* Footnote */}
-        <p
-          style={{
-            marginTop: 16,
-            fontFamily: "var(--font-space-mono, monospace)",
-            fontSize: 10,
-            color: "var(--color-steel)",
-            lineHeight: 1.6,
-            letterSpacing: "0.5px",
-          }}
-        >
+        <p style={{
+          marginTop: 14,
+          fontFamily: "var(--font-space-mono, monospace)",
+          fontSize: 10,
+          color: "var(--color-muted)",
+          lineHeight: 1.6,
+          letterSpacing: "0.5px",
+          opacity: 0.7,
+        }}>
           * {comparisonTable.footnote}
         </p>
       </div>

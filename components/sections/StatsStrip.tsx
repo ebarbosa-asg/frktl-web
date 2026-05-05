@@ -7,66 +7,65 @@ export function StatsStrip() {
     <div
       className="halftone-overlay"
       style={{
-        padding: "70px 24px",
-        background: "var(--color-dark-mid)",
-        borderTop: "1px solid var(--color-slate)",
-        borderBottom: "1px solid var(--color-slate)",
+        padding: "80px 2rem",
+        background: "var(--color-bg-alt)",
+        borderTop: "1px solid var(--color-border)",
+        borderBottom: "1px solid var(--color-border)",
       }}
     >
       <div
         style={{
-          maxWidth: 1100,
+          maxWidth: 1200,
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))",
-          gap: 16,
+          gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+          gap: 2,
         }}
       >
         {stats.map((stat, i) => (
           <div
             key={i}
             style={{
-              background: "var(--color-dark-card)",
-              border: "1px solid var(--color-slate)",
-              borderRadius: 12,
-              padding: "20px 16px",
+              padding: "32px 20px",
               textAlign: "center",
-              transition: "border-color 0.3s, transform 0.3s",
+              borderRight: i < stats.length - 1 ? "1px solid var(--color-border)" : "none",
+              transition: "background 0.25s",
+              cursor: "default",
             }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLDivElement).style.borderColor = "var(--color-teal-light)";
-              (e.currentTarget as HTMLDivElement).style.transform = "translateY(-2px)";
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLDivElement).style.background = "rgba(245,130,10,0.05)";
             }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLDivElement).style.borderColor = "var(--color-slate)";
-              (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)";
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLDivElement).style.background = "transparent";
             }}
           >
-            {/* Large numeral */}
-            <div className="stat-numeral" style={{ color: "var(--color-cyan)" }}>
+            <div
+              className="stat-numeral"
+              style={{ color: "#F5820A", lineHeight: 1 }}
+            >
               {stat.value}
               {stat.unit && (
                 <span
                   style={{
                     fontFamily: "var(--font-space-mono, monospace)",
-                    fontSize: "clamp(14px, 1.5vw, 20px)",
-                    color: "var(--color-teal-light)",
+                    fontSize: "0.38em",
+                    color: "#C8A06A",
                     marginLeft: 4,
+                    verticalAlign: "middle",
                   }}
                 >
                   {stat.unit}
                 </span>
               )}
             </div>
-            {/* Label below */}
             <div
               style={{
                 fontFamily: "var(--font-dm-sans, sans-serif)",
-                fontSize: 11,
-                color: "var(--color-text)",
-                marginTop: 8,
+                fontSize: 10,
+                color: "var(--color-muted)",
+                marginTop: 10,
                 textTransform: "uppercase",
-                letterSpacing: "1px",
+                letterSpacing: "1.5px",
               }}
             >
               {stat.label}

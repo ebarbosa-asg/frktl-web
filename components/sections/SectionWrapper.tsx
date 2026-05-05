@@ -10,46 +10,29 @@ interface SectionWrapperProps {
   style?: React.CSSProperties;
 }
 
-// Variants for staggered children (used by sections with multiple cards/items)
 export const staggerContainer = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-    },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
 };
 
 export const fadeUpItem = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 20,
-    },
-  },
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 100, damping: 20 } },
 };
 
 export function SectionWrapper({ children, className, id, style }: SectionWrapperProps) {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.15 });
+  // isInView passed to children for SVG animate props only — section itself is always visible
+  const isInView = useInView(ref, { once: true, amount: 0.05 });
 
   return (
-    <motion.section
+    <section
       ref={ref}
       id={id}
       className={className}
       style={style}
-      initial={{ opacity: 0, y: 60 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 60 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20 }}
     >
-      {/* Children receive the isInView boolean to pass to SVG components as animate prop */}
       {children(isInView)}
-    </motion.section>
+    </section>
   );
 }
