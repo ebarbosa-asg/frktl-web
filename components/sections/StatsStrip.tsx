@@ -1,3 +1,5 @@
+"use client";
+
 import { stats } from "@/data/stats";
 
 export function StatsStrip() {

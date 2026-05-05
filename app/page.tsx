@@ -1,3 +1,5 @@
+"use client";
+
 import { HeroSection } from "@/components/sections/HeroSection";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { StatsStrip } from "@/components/sections/StatsStrip";
