@@ -1,0 +1,172 @@
+version: "1.0"
+slug: frktl-website
+generated: "2026-05-05"
+total_tasks: 11
+total_complexity: 27
+total_waves: 4
+
+summary:
+  wave_1_tasks: 1
+  wave_2_tasks: 5
+  wave_3_tasks: 4
+  wave_4_tasks: 1
+  parallelizable_tasks: 9
+  sequential_bottlenecks:
+    - "T01 must complete before any Wave 2 task begins"
+    - "All Wave 2 tasks must complete before any Wave 3 task begins"
+    - "All Wave 3 tasks must complete before T11 (deploy)"
+
+waves:
+  - wave: 1
+    label: "Foundation"
+    description: >
+      Scaffold the Next.js 15 + Tailwind v4 project. All subsequent tasks depend on this
+      wave completing successfully. Run alone; no parallelism possible.
+    estimated_duration_minutes: 20
+    tasks:
+      - id: T01
+        title: "Scaffold Next.js 15 + Tailwind v4 + project foundation"
+        complexity: 2
+        model: sonnet
+        can_parallelize_with: []
+        critical_path: true
+
+  - wave: 2
+    label: "Content, Assets, and Data"
+    description: >
+      All five tasks depend only on T01 and have no inter-dependencies. Run fully in parallel.
+      This wave produces: typed content data (T02), all 10 SVG components (T03), SEO
+      infrastructure (T04), the custom wordmark (T05), and the Spline hero scene (T09).
+      Wave 3 cannot start until ALL five complete.
+    estimated_duration_minutes: 60
+    tasks:
+      - id: T02
+        title: "Port explainer content to TypeScript"
+        complexity: 3
+        model: sonnet
+        can_parallelize_with: [T03, T04, T05, T09]
+        critical_path: true
+
+      - id: T03
+        title: "Port all 10 SVG components to isolated TypeScript files"
+        complexity: 2
+        model: sonnet
+        can_parallelize_with: [T02, T04, T05, T09]
+        critical_path: true
+
+      - id: T04
+        title: "Metadata, OG image, robots.ts, sitemap.ts, favicon, JSON-LD"
+        complexity: 2
+        model: sonnet
+        can_parallelize_with: [T02, T03, T05, T09]
+        critical_path: false
+
+      - id: T05
+        title: "FRKTL wordmark — custom CSS/SVG logotype"
+        complexity: 2
+        model: sonnet
+        can_parallelize_with: [T02, T03, T04, T09]
+        critical_path: true
+
+      - id: T09
+        title: "Spline 3D isometric hero scene"
+        complexity: 4
+        model: sonnet
+        can_parallelize_with: [T02, T03, T04, T05]
+        critical_path: false
+        notes: >
+          Highest complexity in Wave 2. If Spline scene design takes longer, the static
+          SVG fallback should be completed first to unblock the wave gate. T09 completion
+          is not required for Wave 3 to begin (it has no Wave 3 dependents).
+
+  - wave: 3
+    label: "Design, Animation, and UX"
+    description: >
+      Four tasks run in parallel. T08 (visual redesign) is the heaviest task in the entire
+      project (complexity 5) and will likely take longest — the wave gate holds until all four
+      complete. T06 requires T05 (wordmark) and T02 (content). T07 requires T02 and T03.
+      T08 requires T02, T03, and T05. T10 requires only T02.
+    estimated_duration_minutes: 90
+    tasks:
+      - id: T06
+        title: "Responsive sticky header + mobile nav"
+        complexity: 2
+        model: sonnet
+        can_parallelize_with: [T07, T08, T10]
+        critical_path: false
+
+      - id: T07
+        title: "Replace IntersectionObserver with Motion scroll animations + spring physics"
+        complexity: 2
+        model: sonnet
+        can_parallelize_with: [T06, T08, T10]
+        critical_path: false
+
+      - id: T08
+        title: "Visual redesign — 50s atomic-age layer"
+        complexity: 5
+        model: sonnet
+        can_parallelize_with: [T06, T07, T10]
+        critical_path: true
+        notes: >
+          This is the longest task in the project. Wave 3 gate is effectively gated on T08.
+          The SVG illustration redesign (sub-scope 8c) modifies the same files produced by T03,
+          so T03 must be complete and committed before T08 begins.
+
+      - id: T10
+        title: "CTA section — 'Get in touch' with mailto"
+        complexity: 1
+        model: sonnet
+        can_parallelize_with: [T06, T07, T08]
+        critical_path: false
+
+  - wave: 4
+    label: "Deploy"
+    description: >
+      Single task. Runs only after all prior waves complete. Connects GitHub → Vercel,
+      configures domain DNS, enables Analytics, verifies production metrics.
+    estimated_duration_minutes: 30
+    tasks:
+      - id: T11
+        title: "Vercel Analytics + Vercel deploy + frktlpower.com custom domain"
+        complexity: 2
+        model: sonnet
+        can_parallelize_with: []
+        critical_path: true
+        notes: >
+          Requires domain registrar DNS access for frktlpower.com. If DNS propagation is
+          slow, verification steps may span 24-48 hours. The deploy step itself (Vercel
+          GitHub integration) is immediate.
+
+model_assignments:
+  sonnet:
+    task_ids: [T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11]
+    reason: "All tasks complexity 1-5, all within Sonnet capability range"
+  opus:
+    task_ids: []
+    reason: "No tasks exceed complexity 5; Opus not required for this project"
+
+estimated_total_duration:
+  sequential_minimum_minutes: 200
+  parallel_optimistic_minutes: 115
+  notes: >
+    Sequential minimum: Wave1(20) + Wave2(60) + Wave3(90) + Wave4(30) = 200 min.
+    Parallel optimistic: each wave runs at the speed of its longest task.
+    Wave 2 longest: T09 at ~45min. Wave 3 longest: T08 at ~60min.
+    Actual time depends on model execution speed and human review gates.
+
+gates:
+  - label: "Wave 2 → Wave 3 gate"
+    position: after_wave_2
+    required_complete: [T02, T03, T04, T05, T09]
+    type: automatic
+    notes: "All 5 Wave 2 tasks must pass before Wave 3 agents are spawned"
+
+  - label: "Wave 3 → Wave 4 gate"
+    position: after_wave_3
+    required_complete: [T06, T07, T08, T10]
+    type: human_review
+    notes: >
+      Human review recommended before deploy. Verify visual design output from T08,
+      wordmark quality from T05, and mobile nav behavior from T06. This is the last
+      chance to iterate before production deployment.

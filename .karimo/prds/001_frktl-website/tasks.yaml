@@ -1,0 +1,371 @@
+version: "1.0"
+slug: frktl-website
+generated: "2026-05-05"
+total_tasks: 11
+total_complexity: 27
+
+tasks:
+  - id: T01
+    title: "Scaffold Next.js 15 + Tailwind v4 + project foundation"
+    description: >
+      Initialize the Next.js 15 App Router project at /Users/loko/frktl-web with TypeScript,
+      Tailwind CSS v4, and the complete directory structure. Configure next.config.ts,
+      tsconfig.json, .eslintrc.json, and globals.css with Tailwind v4 CSS-first import
+      and all 16 CSS custom property color tokens. Set up app/layout.tsx with placeholder
+      metadata and font imports. Create the full directory tree: app/, components/sections/,
+      components/illustrations/, components/ui/, data/, lib/, public/, types/.
+    complexity: 2
+    priority: must
+    wave: 1
+    depends_on: []
+    files:
+      - package.json
+      - next.config.ts
+      - tsconfig.json
+      - .eslintrc.json
+      - postcss.config.mjs
+      - app/layout.tsx
+      - app/page.tsx
+      - app/globals.css
+      - public/.gitkeep
+      - types/index.ts
+    acceptance_criteria:
+      - npm run dev starts without errors
+      - npm run build completes without errors
+      - Tailwind v4 utility classes apply correctly to a test element
+      - All 16 CSS custom property color tokens declared on :root in globals.css
+      - Directory structure matches the project plan (app/, components/, data/, lib/, public/, types/)
+      - tsconfig.json has strict:true and @/ path alias configured
+      - eslint-config-next ruleset applied
+
+  - id: T02
+    title: "Port explainer content to TypeScript (sections data, color tokens → CSS vars)"
+    description: >
+      Extract all content data from /Users/loko/FRKTL/frktl-explainer.jsx into typed TypeScript
+      files. This includes: the 17-section sections array, the 8-stat stats strip, the 9-row
+      comparison table, and the 4-card learning curve. Define strict TypeScript interfaces for
+      all data shapes in types/index.ts. Create lib/tokens.ts exporting typed CSS variable name
+      constants so components reference tokens by name, not magic strings.
+    complexity: 3
+    priority: must
+    wave: 2
+    depends_on:
+      - T01
+    files:
+      - data/sections.ts
+      - data/stats.ts
+      - data/comparison.ts
+      - data/learningCurve.ts
+      - lib/tokens.ts
+      - types/index.ts
+    acceptance_criteria:
+      - data/sections.ts exports Section[] with all 17 sections, all fields preserved (id, tag, accent, visual, title, body)
+      - data/stats.ts exports Stat[] with all 8 statistics
+      - data/comparison.ts exports ComparisonTable with all 9 rows × 4 columns
+      - data/learningCurve.ts exports LearningCurveCard[] with all 4 cards
+      - lib/tokens.ts exports typed CSS var name constants (e.g. TOKENS.teal = 'var(--color-teal)')
+      - All TypeScript interfaces in types/index.ts
+      - Zero any types; tsc --noEmit passes clean
+
+  - id: T03
+    title: "Port all 10 SVG components to isolated TypeScript files"
+    description: >
+      Extract each of the 10 SVG illustration components from frktl-explainer.jsx into
+      individual TypeScript files under components/illustrations/. Each component accepts
+      animate:boolean prop (matching source behavior). All SMIL animations preserved exactly.
+      Inline JS color constants replaced with CSS custom property values from lib/tokens.ts.
+      aria-hidden="true" added to each SVG root.
+      Components: TrisoParticleSVG, PrismaticBlockSVG, ReactorCoreSVG, SCO2CycleSVG,
+      FactoryLineSVG, ModularShippingSVG, QualitySVG, RoadmapTimelineSVG,
+      TestingPipelineSVG, FacilityMapSVG.
+    complexity: 2
+    priority: must
+    wave: 2
+    depends_on:
+      - T01
+    files:
+      - components/illustrations/TrisoParticleSVG.tsx
+      - components/illustrations/PrismaticBlockSVG.tsx
+      - components/illustrations/ReactorCoreSVG.tsx
+      - components/illustrations/SCO2CycleSVG.tsx
+      - components/illustrations/FactoryLineSVG.tsx
+      - components/illustrations/ModularShippingSVG.tsx
+      - components/illustrations/QualitySVG.tsx
+      - components/illustrations/RoadmapTimelineSVG.tsx
+      - components/illustrations/TestingPipelineSVG.tsx
+      - components/illustrations/FacilityMapSVG.tsx
+      - components/illustrations/index.ts
+    acceptance_criteria:
+      - All 10 components render without errors in isolation
+      - All SMIL animations (animate, animateTransform, animateMotion) preserved and functional
+      - animate={false} shows static/opacity-0 state; animate={true} triggers all transitions
+      - RoadmapTimelineSVG accepts activePhase:number prop and highlights the correct phase
+      - All inline JS color references replaced with CSS custom property values
+      - aria-hidden="true" on every SVG root element
+      - Each file is under 200 lines
+
+  - id: T04
+    title: "Metadata, OG image, robots.ts, sitemap.ts, favicon, JSON-LD"
+    description: >
+      Implement the full SEO and metadata infrastructure using Next.js App Router APIs.
+      Export a complete Metadata object from app/layout.tsx. Generate a 1200x630 OG image
+      using next/og ImageResponse in app/opengraph-image.tsx. Add Organization JSON-LD
+      schema inline in the root layout. Create robots.ts and sitemap.ts using the App Router
+      file-based approach. Generate and place favicon.ico and apple-touch-icon.png in /public.
+    complexity: 2
+    priority: must
+    wave: 2
+    depends_on:
+      - T01
+    files:
+      - app/layout.tsx
+      - app/opengraph-image.tsx
+      - app/robots.ts
+      - app/sitemap.ts
+      - public/favicon.ico
+      - public/apple-touch-icon.png
+    acceptance_criteria:
+      - app/layout.tsx exports complete Metadata with title, description, openGraph, twitter, canonical
+      - Title is exactly "FRKTL Energy — Modular Nuclear Reactor | HTGR Technology"
+      - Description is ~155 chars and includes "modular nuclear", "HTGR", "sCO₂ Brayton"
+      - opengraph-image.tsx generates 1200x630 image using ImageResponse with FRKTL branding
+      - robots.ts returns allow all with sitemap URL pointing to https://frktlpower.com/sitemap.xml
+      - sitemap.ts returns single entry for / with lastModified
+      - JSON-LD Organization schema present in layout with name, url, sameAs fields
+      - public/favicon.ico present (32x32)
+      - public/apple-touch-icon.png present (180x180)
+      - <html lang="en"> set in root layout
+
+  - id: T05
+    title: "FRKTL wordmark — custom CSS/SVG logotype"
+    description: >
+      Design and implement the FRKTL custom wordmark from scratch as a React SVG component.
+      No external logo asset exists. The wordmark must convey industrial confidence and
+      vowel-stripped compression with subtle nuclear/energy references. Implement as
+      components/ui/FRKTLWordmark.tsx accepting variant and size props. All letterforms
+      must be inline SVG paths (no external font dependency). Three color variants required:
+      light (white on transparent), orange (accent), dark (for light backgrounds).
+      Design approaches to explore: tight condensed letterforms, possible R-K ligature,
+      atom orbit or starburst prefix glyph, hexagonal accent element referencing prismatic
+      fuel block geometry.
+    complexity: 2
+    priority: must
+    wave: 2
+    depends_on:
+      - T01
+    files:
+      - components/ui/FRKTLWordmark.tsx
+    acceptance_criteria:
+      - <FRKTLWordmark /> renders without external font dependency (all paths inline in SVG)
+      - Scales cleanly from 80px to 240px wide without pixelation
+      - variant="light" | "orange" | "dark" prop controls color
+      - No external assets referenced (self-contained SVG paths)
+      - Wordmark is visually distinctive and readable as a logo
+      - White variant passes 4.5:1 contrast ratio on --color-dark background
+
+  - id: T06
+    title: "Responsive sticky header + mobile nav (dot nav + hamburger)"
+    description: >
+      Build the site header and navigation system. Desktop: sticky header with FRKTL wordmark
+      (left-aligned) and fixed dot navigation (right viewport edge, 17 dots one per section).
+      Mobile: sticky header with wordmark + hamburger button opening a full-screen slide-down
+      nav menu listing all 17 sections. The useActiveSection hook drives dot highlighting.
+      Header background transitions from transparent to dark/90 with backdrop blur on scroll.
+      Full keyboard accessibility for dot navigation (focusable, ARIA labels, Enter/Space).
+    complexity: 2
+    priority: must
+    wave: 3
+    depends_on:
+      - T02
+      - T05
+    files:
+      - components/ui/Header.tsx
+      - components/ui/NavDots.tsx
+      - components/ui/MobileNav.tsx
+      - hooks/useActiveSection.ts
+    acceptance_criteria:
+      - Header is position sticky top-0 with z-index above all content
+      - Desktop dot navigation renders 17 dots, each with aria-label of section title
+      - Active dot highlights as user scrolls (driven by useActiveSection hook)
+      - Dot click triggers scrollIntoView({ behavior:'smooth' })
+      - Dots are focusable; Enter/Space activates scroll
+      - Mobile breakpoint (<768px): dot nav hidden, hamburger visible
+      - Hamburger opens full-screen overlay with all 17 sections as links
+      - Mobile menu closes on link click or Esc key
+      - Header bg transitions from transparent to dark/90 + backdrop-blur on scroll
+      - FRKTLWordmark renders in header at appropriate size
+
+  - id: T07
+    title: "Replace IntersectionObserver with Motion scroll animations + spring physics"
+    description: >
+      Install motion/react (Framer Motion v11+) and replace the existing IntersectionObserver
+      + CSS class toggle animation system with Motion useInView and motion.div wrappers.
+      Upgrade entrance animations from linear ease to spring physics with slight bounce.
+      Add scroll-linked parallax to the hero section using useScroll + useTransform.
+      Preserve the one-shot trigger behavior (once:true, amount:0.15 matching original threshold).
+      Preserve the activePhase roadmap cycling interval.
+    complexity: 2
+    priority: must
+    wave: 3
+    depends_on:
+      - T02
+      - T03
+    files:
+      - package.json
+      - components/sections/SectionWrapper.tsx
+      - components/sections/HeroSection.tsx
+      - hooks/useScrollParallax.ts
+    acceptance_criteria:
+      - motion/react installed and in package.json
+      - All 17 section entrances use motion.div with useInView({ once:true, amount:0.15 })
+      - Entrance: initial={{ opacity:0, y:60 }} to animate={{ opacity:1, y:0 }} with spring (stiffness:100, damping:20)
+      - SVG components still receive animate:boolean driven by the Motion inView state
+      - Staggered children use variants with staggerChildren:0.08
+      - Hero section has parallax effect (0.3x scroll rate) on at least one element
+      - activePhase roadmap cycling (3-second interval) is preserved in RoadmapSection
+      - Zero IntersectionObserver calls remain in codebase
+      - npm run build completes without bundle size regression warnings
+
+  - id: T08
+    title: "Visual redesign — 50s atomic-age layer (Atomic Age font, editorial orange/cream chapter markers, thick-stroke SVG illustrations, atomic starburst decorations)"
+    description: >
+      The central design task. Apply the full "Nuclear Optimism" visual language across the
+      entire page. Three sub-scopes:
+
+      8a Typography: Add Atomic Age via next/font/google for TAG chapter markers. Push hero
+      headline to clamp(48px, 8vw, 100px). Stats strip numerals at 64px+.
+
+      8b Decorative system: AtomicStarburst SVG component (configurable points and colors)
+      used as section background accents in 3+ sections. Halftone CSS overlay on alternating
+      dark sections. Boomerang/amoeba border-radius blob shapes on learning curve cards.
+      Diagonal DANGER-tape stripe background on the safety section.
+
+      8c SVG illustration redesign: All 10 SVG components redesigned with 3-4px stroke width,
+      rounded linecaps, filled color regions (orange, gold, cream warmth). All SMIL animations
+      preserved. Bold editorial illustration quality replacing thin technical line style.
+    complexity: 5
+    priority: must
+    wave: 3
+    depends_on:
+      - T02
+      - T03
+      - T05
+    files:
+      - app/globals.css
+      - app/layout.tsx
+      - components/ui/AtomicStarburst.tsx
+      - components/illustrations/TrisoParticleSVG.tsx
+      - components/illustrations/PrismaticBlockSVG.tsx
+      - components/illustrations/ReactorCoreSVG.tsx
+      - components/illustrations/SCO2CycleSVG.tsx
+      - components/illustrations/FactoryLineSVG.tsx
+      - components/illustrations/ModularShippingSVG.tsx
+      - components/illustrations/QualitySVG.tsx
+      - components/illustrations/RoadmapTimelineSVG.tsx
+      - components/illustrations/TestingPipelineSVG.tsx
+      - components/illustrations/FacilityMapSVG.tsx
+      - components/sections/StatsStrip.tsx
+      - components/sections/ComparisonTable.tsx
+      - components/sections/LearningCurve.tsx
+      - components/sections/SafetySection.tsx
+    acceptance_criteria:
+      - Atomic Age font renders on all 17 section TAG labels
+      - Hero headline is clamp(48px, 8vw, 100px) on desktop
+      - AtomicStarburst component present and used in 3+ section backgrounds
+      - Halftone CSS overlay visible at low opacity on 2+ alternating dark sections
+      - All 10 SVG illustrations have stroke-width >= 3, strokeLinecap="round", and at least one filled color region
+      - Learning curve cards have organic amoeba/blob border-radius treatment
+      - Safety section has diagonal stripe background element
+      - Stats strip numerals are 64px+ with clear typographic hierarchy below
+      - Page is visually cohesive — the three aesthetic layers (50s, isometric, modern grid) coexist without clash
+
+  - id: T09
+    title: "Spline 3D isometric hero scene (cute nuclear factory, lazy-loaded)"
+    description: >
+      Create or integrate a Spline 3D isometric hero scene for the above-the-fold section.
+      The scene depicts a miniature friendly nuclear factory: modular reactor buildings,
+      cooling tower with puff cloud, a delivery truck, human-scale workers. Toy-town aesthetic.
+      Warm golden-hour lighting. Palette: warm greens, terracotta, powder blue.
+      Wrap in React.lazy + Suspense with a static SVG isometric illustration as the fallback
+      (also serves as the LCP target). On mobile (<768px), use static fallback only.
+    complexity: 4
+    priority: must
+    wave: 2
+    depends_on:
+      - T01
+    files:
+      - components/HeroScene.tsx
+      - components/HeroSceneFallback.tsx
+      - public/hero-scene-fallback.svg
+    acceptance_criteria:
+      - HeroScene.tsx wraps Spline in React.lazy + Suspense
+      - Static SVG fallback renders immediately (is the LCP element)
+      - Spline scene loads only after fallback is painted (does not block LCP)
+      - Scene renders without WebGL errors on Chrome, Safari, Firefox
+      - Mobile (<768px) uses static SVG fallback only (no Spline loaded)
+      - Hero section is 100dvh, scene fills available space
+      - "@splinetool/react-spline" in package.json
+      - Scene aesthetic matches the "toy town nuclear factory" direction
+
+  - id: T10
+    title: "CTA section — 'Get in touch' with mailto:eduardo@frktlpower.com + investor pitch context"
+    description: >
+      Build the CTA section positioned at the bottom of the page before the footer.
+      Copy: eyebrow "READY TO POWER THE FUTURE?", headline "Get in touch.", body text with
+      investor/partner/customer pitch context. Primary CTA button links to
+      mailto:eduardo@frktlpower.com. Secondary plain-text email link. Uses the warm
+      orange/cream editorial palette. Atomic starburst decoration in background.
+      Single column on mobile with full-width button.
+    complexity: 1
+    priority: must
+    wave: 3
+    depends_on:
+      - T02
+    files:
+      - components/sections/CTASection.tsx
+    acceptance_criteria:
+      - CTASection.tsx renders as penultimate section (before footer)
+      - CTA button href is exactly "mailto:eduardo@frktlpower.com"
+      - No JavaScript email obfuscation
+      - Eyebrow, headline, body copy match spec exactly
+      - Section uses orange/cream palette (distinct from dark navy sections)
+      - Atomic starburst decoration present in background
+      - Correct heading hierarchy (h2 for section headline)
+      - Mobile: single column layout, button is full-width
+
+  - id: T11
+    title: "Vercel Analytics + Vercel deploy + frktlpower.com custom domain"
+    description: >
+      Deploy the site to Vercel via GitHub integration. Configure frktlpower.com and
+      www.frktlpower.com as custom domains. Enable Vercel Analytics by installing
+      @vercel/analytics and adding the Analytics component to app/layout.tsx.
+      Verify Core Web Vitals pass in Speed Insights. Confirm all SEO artifacts
+      (robots.txt, sitemap.xml, OG image) are accessible on the production URL.
+    complexity: 2
+    priority: must
+    wave: 4
+    depends_on:
+      - T01
+      - T02
+      - T03
+      - T04
+      - T05
+      - T06
+      - T07
+      - T08
+      - T09
+      - T10
+    files:
+      - package.json
+      - app/layout.tsx
+      - vercel.json
+    acceptance_criteria:
+      - "@vercel/analytics" in package.json, <Analytics /> in app/layout.tsx
+      - Site deploys from main branch via Vercel GitHub integration
+      - frktlpower.com and www.frktlpower.com both route to deployment
+      - HTTPS verified (green padlock)
+      - Vercel Speed Insights shows LCP < 2.5s on production
+      - npm run build clean with no env var warnings
+      - OG image verified working via external OG checker
+      - https://frktlpower.com/robots.txt accessible
+      - https://frktlpower.com/sitemap.xml accessible
