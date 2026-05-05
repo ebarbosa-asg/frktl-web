@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+:root {
+  /* FRKTL Brand Palette — ported from frktl-explainer.jsx constants */
+  --color-teal: #0d7377;
+  --color-teal-light: #14a3a8;
+  --color-teal-dark: #0a5c5f;
+  --color-cyan: #00d4aa;
+  --color-dark: #0a1628;
+  --color-dark-mid: #0f2035;
+  --color-dark-card: #111d30;
+  --color-slate: #1a2a42;
+  --color-text: #c8dce8;
+  --color-text-bright: #e8f4f8;
+  --color-orange: #ff6b35;
+  --color-gold: #fbbf24;
+  --color-cream: #fff8ee;
+  --color-steel: #8899aa;
+  --color-purple: #a78bfa;
+  --color-green: #34d399;
+  --color-red-soft: #f87171;
+
+  /* 50s Atomic-Age additional tokens (for T08 visual redesign) */
+  --color-atomic-orange: #e8521a;
+  --color-atomic-cream: #f5e6c8;
+  --color-atomic-rust: #8b3a1a;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-dark);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
