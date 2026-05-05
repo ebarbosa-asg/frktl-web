@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Mono, DM_Sans, Instrument_Serif } from "next/font/google";
+import { Space_Mono, DM_Sans, Instrument_Serif, Atomic_Age } from "next/font/google";
 import "./globals.css";
 
 const spaceMono = Space_Mono({
@@ -23,7 +23,12 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
-// T08: Add Atomic Age font here
+const atomicAge = Atomic_Age({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-atomic-age",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "FRKTL Energy — Modular Nuclear Reactor | HTGR Technology",
@@ -85,7 +90,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${spaceMono.variable} ${dmSans.variable} ${instrumentSerif.variable}`}
+      className={`${spaceMono.variable} ${dmSans.variable} ${instrumentSerif.variable} ${atomicAge.variable}`}
     >
       <head>
         <script

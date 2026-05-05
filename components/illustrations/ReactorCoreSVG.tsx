@@ -18,10 +18,12 @@ export function ReactorCoreSVG({ animate }: SVGIllustrationProps) {
     >
       <defs>
         <linearGradient id="vesselGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#4a5568" />
-          <stop offset="100%" stopColor="#2d3748" />
+          <stop offset="0%" stopColor="#3a3020" />
+          <stop offset="100%" stopColor="#1a1408" />
         </linearGradient>
       </defs>
+
+      {/* Outer pressure vessel */}
       <rect
         x="60"
         y="30"
@@ -29,9 +31,11 @@ export function ReactorCoreSVG({ animate }: SVGIllustrationProps) {
         height="320"
         rx="20"
         fill="url(#vesselGrad)"
-        stroke="#718096"
-        strokeWidth="3"
+        stroke="var(--color-steel)"
+        strokeWidth="4"
+        strokeLinejoin="round"
       />
+      {/* Inner cavity */}
       <rect
         x="80"
         y="50"
@@ -40,8 +44,11 @@ export function ReactorCoreSVG({ animate }: SVGIllustrationProps) {
         rx="12"
         fill="var(--color-dark)"
         stroke="var(--color-teal-dark)"
-        strokeWidth="2"
+        strokeWidth="3"
+        strokeLinejoin="round"
       />
+
+      {/* Fuel blocks */}
       {fuelRows.map(([row, col]) => (
         <rect
           key={`${row}-${col}`}
@@ -49,16 +56,19 @@ export function ReactorCoreSVG({ animate }: SVGIllustrationProps) {
           y={65 + row * 50}
           width="48"
           height="42"
-          rx="3"
-          fill="#2a2a2a"
+          rx="4"
+          fill="#2a1e0e"
           stroke="var(--color-teal-dark)"
-          strokeWidth="1"
+          strokeWidth="2"
+          strokeLinejoin="round"
           opacity={animate ? 0.9 : 0.3}
           style={{
             transition: `opacity 0.5s ease ${(row * 3 + col) * 0.05}s`,
           }}
         />
       ))}
+
+      {/* Coolant flow arrows */}
       {animate &&
         coolantY.map((y, i) => (
           <g key={`a${i}`}>
@@ -67,9 +77,10 @@ export function ReactorCoreSVG({ animate }: SVGIllustrationProps) {
               y1={y}
               x2="85"
               y2={y - 30}
-              stroke="var(--color-orange)"
-              strokeWidth="2"
-              opacity="0.6"
+              stroke="var(--color-atomic-orange)"
+              strokeWidth="3"
+              strokeLinecap="round"
+              opacity="0.8"
             >
               <animate
                 attributeName="y1"
@@ -84,8 +95,9 @@ export function ReactorCoreSVG({ animate }: SVGIllustrationProps) {
               x2="275"
               y2={y - 30}
               stroke="var(--color-cyan)"
-              strokeWidth="2"
-              opacity="0.6"
+              strokeWidth="3"
+              strokeLinecap="round"
+              opacity="0.8"
             >
               <animate
                 attributeName="y1"
@@ -97,14 +109,17 @@ export function ReactorCoreSVG({ animate }: SVGIllustrationProps) {
             </line>
           </g>
         ))}
+
+      {/* Side labels */}
       <text
         x="55"
         y="200"
         textAnchor="middle"
-        fill="var(--color-orange)"
+        fill="var(--color-atomic-orange)"
         fontSize="9"
+        fontWeight="700"
+        fontFamily="var(--font-space-mono, monospace)"
         transform="rotate(-90,55,200)"
-        fontWeight="600"
       >
         HOT He ↑ 700°C+
       </text>
@@ -114,22 +129,33 @@ export function ReactorCoreSVG({ animate }: SVGIllustrationProps) {
         textAnchor="middle"
         fill="var(--color-cyan)"
         fontSize="9"
+        fontWeight="700"
+        fontFamily="var(--font-space-mono, monospace)"
         transform="rotate(90,305,200)"
-        fontWeight="600"
       >
         COOL He ↓ 250°C
       </text>
+
+      {/* Bottom labels */}
       <text
         x="180"
         y="375"
         textAnchor="middle"
         fill="var(--color-text-bright)"
         fontSize="13"
-        fontWeight="600"
+        fontWeight="700"
+        fontFamily="var(--font-space-mono, monospace)"
       >
         Reactor Pressure Vessel
       </text>
-      <text x="180" y="393" textAnchor="middle" fill="var(--color-text)" fontSize="10">
+      <text
+        x="180"
+        y="393"
+        textAnchor="middle"
+        fill="var(--color-text)"
+        fontSize="10"
+        fontFamily="var(--font-dm-sans, sans-serif)"
+      >
         Prismatic blocks + helium coolant
       </text>
     </svg>

@@ -47,3 +47,95 @@ body {
 .font-mono { font-family: var(--font-space-mono), monospace; }
 .font-sans { font-family: var(--font-dm-sans), sans-serif; }
 .font-serif { font-family: var(--font-instrument-serif), serif; }
+
+/* ─── T08: Typography upgrades ─── */
+.font-atomic { font-family: var(--font-atomic-age), cursive; }
+
+/* TAG label / chapter marker — Atomic Age font */
+.tag-label {
+  font-family: var(--font-atomic-age), cursive;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+/* Section header — editorial bold */
+.section-title {
+  font-family: var(--font-dm-sans), sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* Hero headline — Instrument Serif, huge */
+.hero-title {
+  font-family: var(--font-instrument-serif), serif;
+  font-size: clamp(48px, 8vw, 100px);
+  line-height: 1.05;
+  font-weight: 400;
+}
+
+/* Stats numeral — Space Mono large */
+.stat-numeral {
+  font-family: var(--font-space-mono), monospace;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* Body text */
+.body-text {
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--color-text);
+  white-space: pre-line;
+}
+
+/* ─── T08: Decorative system ─── */
+
+/* Halftone dot overlay for alternating dark sections */
+.halftone-overlay {
+  position: relative;
+}
+.halftone-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--color-slate) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+/* Blob/amoeba border-radius for learning curve cards */
+.card-blob-1 { border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%; }
+.card-blob-2 { border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%; }
+.card-blob-3 { border-radius: 70% 30% 50% 50% / 40% 60% 40% 60%; }
+.card-blob-4 { border-radius: 30% 70% 60% 40% / 50% 40% 60% 50%; }
+
+/* Diagonal DANGER tape stripe for safety section */
+.danger-tape-bg {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 12px,
+    var(--color-orange) 12px,
+    var(--color-orange) 16px,
+    transparent 16px,
+    transparent 28px,
+    var(--color-gold) 28px,
+    var(--color-gold) 32px
+  );
+  opacity: 0.08;
+}
+
+/* ─── Animation keyframes ─── */
+@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+/* Responsive grid for content sections */
+@media (max-width: 768px) {
+  .content-grid { flex-direction: column !important; }
+  .visual-col { order: -1 !important; margin-bottom: 24px !important; }
+}

@@ -1,46 +1,10 @@
 "use client";
 
 import { motion } from "motion/react";
+import { AtomicStarburst } from "@/components/ui/AtomicStarburst";
 
-// AtomicStarburst will be imported from T08 — use inline fallback until T08 runs
-function StarburstDecor({
-  size,
-  points,
-  opacity,
-  color,
-  className,
-}: {
-  size: number;
-  points: number;
-  opacity: number;
-  color: string;
-  className?: string;
-}) {
-  const cx = 100;
-  const cy = 100;
-  const outerRadius = 60;
-  const innerRadius = 36;
-  const pathPoints: [number, number][] = [];
-  for (let i = 0; i < points * 2; i++) {
-    const angle = (Math.PI / points) * i - Math.PI / 2;
-    const r = i % 2 === 0 ? outerRadius : innerRadius;
-    pathPoints.push([cx + r * Math.cos(angle), cy + r * Math.sin(angle)]);
-  }
-  const d =
-    pathPoints.map((p, i) => `${i === 0 ? "M" : "L"} ${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(" ") + " Z";
-
-  return (
-    <svg
-      viewBox="0 0 200 200"
-      width={size}
-      height={size}
-      className={className}
-      aria-hidden="true"
-    >
-      <path d={d} fill={color} opacity={opacity} />
-    </svg>
-  );
-}
+// Alias for local use
+const StarburstDecor = AtomicStarburst;
 
 export function CTASection() {
   return (
