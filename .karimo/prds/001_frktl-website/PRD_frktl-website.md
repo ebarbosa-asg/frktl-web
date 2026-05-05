@@ -191,8 +191,8 @@ Initialize the Next.js 15 App Router project at `/Users/loko/frktl-web` with Typ
 - `npm run dev` starts without errors
 - `npm run build` completes without errors
 - Tailwind v4 utility classes apply correctly to a test element
-- CSS custom properties declared on `:root` in `globals.css` for all 16 color tokens
-- Directory structure matches the plan in `/research/internal/dependencies.md`
+- All 19 CSS custom property color tokens declared on `:root` in `globals.css` (16 brand + 3 atomic-age)
+- Directory structure exists: `app/`, `components/sections/`, `components/illustrations/`, `components/ui/`, `data/`, `lib/`, `public/`, `types/`
 - `tsconfig.json` has `strict: true` and path aliases configured (`@/` → root)
 - `.eslintrc.json` uses `eslint-config-next` ruleset
 

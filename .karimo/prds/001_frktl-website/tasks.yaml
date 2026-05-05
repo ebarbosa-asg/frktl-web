@@ -11,7 +11,7 @@ tasks:
       Initialize the Next.js 15 App Router project at /Users/loko/frktl-web with TypeScript,
       Tailwind CSS v4, and the complete directory structure. Configure next.config.ts,
       tsconfig.json, .eslintrc.json, and globals.css with Tailwind v4 CSS-first import
-      and all 16 CSS custom property color tokens. Set up app/layout.tsx with placeholder
+      and all 19 CSS custom property color tokens (16 brand + 3 atomic-age). Set up app/layout.tsx with placeholder
       metadata and font imports. Create the full directory tree: app/, components/sections/,
       components/illustrations/, components/ui/, data/, lib/, public/, types/.
     complexity: 2
@@ -33,7 +33,7 @@ tasks:
       - npm run dev starts without errors
       - npm run build completes without errors
       - Tailwind v4 utility classes apply correctly to a test element
-      - All 16 CSS custom property color tokens declared on :root in globals.css
+      - All 19 CSS custom property color tokens declared on :root in globals.css (16 brand + 3 atomic-age: --color-atomic-orange, --color-atomic-cream, --color-atomic-rust)
       - Directory structure matches the project plan (app/, components/, data/, lib/, public/, types/)
       - tsconfig.json has strict:true and @/ path alias configured
       - eslint-config-next ruleset applied

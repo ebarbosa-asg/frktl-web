@@ -42,5 +42,5 @@ boundaries:
 deployment:
   platform: "vercel"
   domain: "frktlpower.com"
-  strategy: "static_export"
-  notes: "next.config output='export' is recommended — no API routes, no server actions, fully static."
+  strategy: "vercel_ssr"
+  notes: "Deploy to Vercel with SSR runtime — no output: 'export'. This preserves next/image, next/og, and Vercel Analytics. The site is effectively static (no server-side data fetching) but uses Vercel's Node.js runtime."
